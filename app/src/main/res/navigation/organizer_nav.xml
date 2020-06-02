@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/organizer_nav"
+    app:startDestination="@id/overview">
+
+    <activity
+        android:id="@+id/overview"
+        android:name="com.example.pdaorganizer.Overview"
+        android:label="activity_overview"
+        tools:layout="@layout/activity_overview" />
+    <activity
+        android:id="@+id/statistics"
+        android:name="com.example.pdaorganizer.Statistics"
+        android:label="activity_statistics"
+        tools:layout="@layout/activity_statistics" />
+    <activity
+        android:id="@+id/newIssue"
+        android:name="com.example.pdaorganizer.NewIssue"
+        android:label="activity_new_issue"
+        tools:layout="@layout/activity_new_issue" />
+
+</navigation>

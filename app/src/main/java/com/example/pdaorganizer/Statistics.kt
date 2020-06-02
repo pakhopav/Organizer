@@ -1,29 +1,26 @@
 package com.example.pdaorganizer
 
 import android.content.Intent
-import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.pdaorganizer.db.DbHelper
+import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity() {
+class Statistics : AppCompatActivity() {
     private lateinit var bottomNavigationView :BottomNavigationView
-    private lateinit var button :Button
-    private lateinit var res :TextView
-    private lateinit var dbHelper: DbHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_statistics)
         bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        bottomNavigationView.menu.getItem(0).setChecked(true)
-
+        bottomNavigationView.menu.getItem(3).setChecked(true)
+//        bottomNavigationView.getMenu().getItem(R.id.statistics).setChecked(true)
         bottomNavigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.home ->  true
-
+                R.id.home -> {
+                    startActivity(Intent(applicationContext, MainActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    return@OnNavigationItemSelectedListener true
+                }
                 R.id.overview -> {
                     startActivity(Intent(applicationContext, Overview::class.java))
                     overridePendingTransition(0, 0)
@@ -34,27 +31,10 @@ class MainActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.statistics -> {
-                    startActivity(Intent(applicationContext, Statistics::class.java))
-                    overridePendingTransition(0, 0)
-                    return@OnNavigationItemSelectedListener true
-                }
+                R.id.statistics ->  true
+
             }
             false
         })
-
-
-        button = findViewById(R.id.button1)
-        res = findViewById(R.id.result)
-        dbHelper = DbHelper(this)
-    }
-
-
-
-    fun writeAllIssues(view: View){
-        val list = dbHelper.getAllIssues()
-        val sb = StringBuilder()
-        list.forEach { it -> sb.append(it.name+ " ") }
-        res.setText(sb.toString())
     }
 }

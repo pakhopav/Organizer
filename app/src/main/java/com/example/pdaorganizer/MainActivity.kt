@@ -50,11 +50,20 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    fun goToReg(view: View){
+        val intent = Intent(this, Register::class.java)
+        startActivity(intent)
+    }
+
+    fun getAllUsers(view: View){
+        val list = dbHelper.getAllUser()
+        res.setText(list.first().name)
+    }
 
     fun writeAllIssues(view: View){
         val list = dbHelper.getAllIssues()
-        val sb = StringBuilder()
-        list.forEach { it -> sb.append(it.name+ " ") }
-        res.setText(sb.toString())
+//        val sb = StringBuilder()
+//        list.forEach { it -> sb.append(it.name+ " ") }
+        res.setText(list.first().name)
     }
 }

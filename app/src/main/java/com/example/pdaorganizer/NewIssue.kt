@@ -78,12 +78,18 @@ class NewIssue : AppCompatActivity() {
         val newIssue = Issue(name = nameInput.text.toString().trim(),
                             category = categoryInput.text.toString().trim(),
                             description =  descriptionInput.text.toString().trim(),
-                            importance = importanceInput.text.toString().trim().toInt(),
+                            importance = importanceInput.text.toString().trim(),
                             deadline = deadlineInput.text.toString().trim())
         dbHelper.addIssue(newIssue)
     }
+    fun createIssue2(){
+
+        dbHelper.addIssue2(nameInput.text.toString().trim())
+    }
+
 
     fun issueCreationButtonOnClick(view: View){
         createIssue()
+//        createIssue2()
     }
 }

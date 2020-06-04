@@ -1,6 +1,7 @@
 package com.example.pdaorganizer
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -9,11 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.pdaorganizer.db.DbHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView :BottomNavigationView
     private lateinit var button :Button
     private lateinit var res :TextView
     private lateinit var dbHelper: DbHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -60,10 +63,5 @@ class MainActivity : AppCompatActivity() {
         res.setText(list.first().name)
     }
 
-    fun writeAllIssues(view: View){
-        val list = dbHelper.getAllIssues()
-//        val sb = StringBuilder()
-//        list.forEach { it -> sb.append(it.name+ " ") }
-        res.setText(list.first().name)
-    }
+
 }

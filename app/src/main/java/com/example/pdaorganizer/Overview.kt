@@ -1,5 +1,6 @@
 package com.example.pdaorganizer
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +17,7 @@ class Overview : AppCompatActivity() {
 
 
     private lateinit var dbHelper: DbHelper
-    private lateinit var issuesArray: Array<Issue>
+    private lateinit var issuesArray: ArrayList<Issue>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_overview)
@@ -60,6 +61,7 @@ class Overview : AppCompatActivity() {
 
     fun initObjects(){
         dbHelper = DbHelper(this)
-        issuesArray = dbHelper.getAllIssues().toTypedArray()
+        val userId = getSharedPreferences(DbHelper.SHARED_PREFS, Context.MODE_PRIVATE).getInt(DbHelper.USER_ID ,-1)
+        issuesArray = ArrayList(dbHelper.getAllIssuesOfUser(userId))
     }
 }

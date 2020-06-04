@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PDA organizer</string>
+    <string-array name="issueCategoriesStrings">
+        <item>No Category</item>
+        <item>Debt</item>
+        <item>Shop</item>
+        <item>School</item>
+        <item>Work</item>
+    </string-array>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.pdaorganizer
+package com.example.pdaorganizer.activities
 
 import android.content.Context
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import com.example.pdaorganizer.R
 import com.example.pdaorganizer.db.DbHelper
 import com.example.pdaorganizer.model.User
 
@@ -63,6 +64,6 @@ class Login : AppCompatActivity() {
 
     fun skipLoginTask(){
         val userId = getSharedPreferences(DbHelper.SHARED_PREFS, Context.MODE_PRIVATE).getInt(DbHelper.USER_ID ,-1)
-        if(userId != -1)startActivity(Intent(this, Overview::class.java))
+        if(userId != -1) startActivity(Intent(this, Overview::class.java))
     }
 }

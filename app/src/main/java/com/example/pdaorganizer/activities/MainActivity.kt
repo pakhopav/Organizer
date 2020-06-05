@@ -1,38 +1,51 @@
-package com.example.pdaorganizer
+package com.example.pdaorganizer.activities
 
+import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+//import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
+import com.example.pdaorganizer.R
 import com.example.pdaorganizer.db.DbHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
+import androidx.appcompat.widget.Toolbar;
+import com.example.pdaorganizer.helpers.DateHelper
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var bottomNavigationView :BottomNavigationView
-    private lateinit var button :Button
-    private lateinit var res :TextView
+    private lateinit var bottomNavigationView : BottomNavigationView
+    private lateinit var button : Button
+    private lateinit var usernameField : TextView
     private lateinit var dbHelper: DbHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        dbHelper = DbHelper(this)
+
+        initNavBar()
+
+        initViews()
+    }
+
+
+    fun initNavBar(){
         bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.menu.getItem(0).setChecked(true)
-
         bottomNavigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.home ->  true
-
+                R.id.home -> {
+                    return@OnNavigationItemSelectedListener true
+                }
                 R.id.overview -> {
                     startActivity(Intent(applicationContext, Overview::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.newIssue -> {
+                R.id.newIssueExpireDateInput -> {
                     startActivity(Intent(applicationContext, NewIssue::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
@@ -45,23 +58,21 @@ class MainActivity : AppCompatActivity() {
             }
             false
         })
-
-
-        button = findViewById(R.id.button1)
-        res = findViewById(R.id.result)
-        dbHelper = DbHelper(this)
     }
 
 
-    fun goToReg(view: View){
-        val intent = Intent(this, Register::class.java)
-        startActivity(intent)
+    fun initViews(){
+        usernameField = findViewById(R.id.usernameContainer)
+        val username = dbHelper.getUserById(getSharedPreferences(DbHelper.SHARED_PREFS, Context.MODE_PRIVATE).getInt(DbHelper.USER_ID ,-1))
+        usernameField.setText(username?.name)
     }
 
-    fun getAllUsers(view: View){
-        val list = dbHelper.getAllUser()
-        res.setText(list.first().name)
+    fun logOut(view: View){
+        val sp = getSharedPreferences(DbHelper.SHARED_PREFS, Context.MODE_PRIVATE)
+        val editor = sp.edit()
+        val i = -1
+        editor.putInt(DbHelper.USER_ID, i)
+        editor.apply()
+        startActivity(Intent(this, Login::class.java))
     }
-
-
 }

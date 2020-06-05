@@ -1,34 +1,42 @@
-package com.example.pdaorganizer
+package com.example.pdaorganizer.activities
 
+import android.Manifest
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.pdaorganizer.R
 import com.example.pdaorganizer.adapter.DatePickFragment
 import com.example.pdaorganizer.adapter.IssueCategorySpinnerAdapter
 import com.example.pdaorganizer.adapter.IssueImportanceSpinnerAdapter
 import com.example.pdaorganizer.db.DbHelper
+import com.example.pdaorganizer.helpers.StorageHelper
 import com.example.pdaorganizer.model.Issue
 import com.example.pdaorganizer.model.IssueCategory
 import com.example.pdaorganizer.model.IssueImportance
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
     private lateinit var bottomNavigationView :BottomNavigationView
 
     private lateinit var nameInput : EditText
     private lateinit var descriptionInput : EditText
-    private lateinit var deadlineInput : EditText
     private lateinit var button: Button
-    private lateinit var deadlineButton: Button
+    private lateinit var errorMessage : TextView
+    private lateinit var image :ImageView
+    private lateinit var delImgBtn :ImageButton
 
 
     private lateinit var dbHelper: DbHelper
@@ -37,7 +45,11 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
     private lateinit var categorySpinnerAdapter : IssueCategorySpinnerAdapter
     private lateinit var importanceSpinner: Spinner
     private lateinit var importanceSpinnerAdapter : IssueImportanceSpinnerAdapter
+    private  lateinit var storageHelper: StorageHelper
+
+    private val REQUEST_IMAGE_CAPTURE = 1
     private var deadlineDate = ""
+    private var photoPath = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +61,17 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
 
         initObjects()
 
-        val i = 8
-
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            findViewById<ImageButton>(R.id.imageButton3).setEnabled(false)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ),
+                0
+            )
+        }
     }
 
 
@@ -69,7 +90,7 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.newIssue -> true
+                R.id.newIssueExpireDateInput -> true
 
                 R.id.statistics -> {
                     startActivity(Intent(applicationContext, Statistics::class.java))
@@ -87,11 +108,16 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
         button = findViewById(R.id.issueCreate)
         categorySpinner = findViewById(R.id.issueCategorySpinner)
         importanceSpinner = findViewById(R.id.issueImportanceSpinner)
-        deadlineButton = findViewById(R.id.deadlineButton)
+        errorMessage =findViewById(R.id.newIssueError)
+        errorMessage.visibility = View.GONE
+        image = findViewById(R.id.newissueImage)
+        delImgBtn = findViewById(R.id.newissueDeleteImage)
     }
 
     fun initObjects(){
         dbHelper = DbHelper(this)
+        storageHelper = StorageHelper(this)
+
 
         categoryArrayList = ArrayList()
         categoryArrayList.add(IssueCategory(R.drawable.ic_no_category, "No category"))
@@ -104,9 +130,16 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
         categorySpinner.adapter = categorySpinnerAdapter
         categorySpinner.setVisibility(View.VISIBLE)
 
-        val green = ContextCompat.getColor(this, R.color.colorImportanceL)
-        val yellow = ContextCompat.getColor(this, R.color.colorImportanceM)
-        val red = ContextCompat.getColor(this, R.color.colorImportanceH)
+
+        val green = ContextCompat.getColor(this,
+            R.color.colorImportanceL
+        )
+        val yellow = ContextCompat.getColor(this,
+            R.color.colorImportanceM
+        )
+        val red = ContextCompat.getColor(this,
+            R.color.colorImportanceH
+        )
         val array = arrayListOf(IssueImportance(green, "Low importance"),IssueImportance(yellow, "Mid importance"),IssueImportance(red, "High importance"))
         importanceSpinnerAdapter = IssueImportanceSpinnerAdapter(this, array)
         importanceSpinner.adapter = importanceSpinnerAdapter
@@ -126,7 +159,10 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
                             category = selectedCategory,
                             description =  descriptionInput.text.toString().trim(),
                             importance = selectedImportance,
-                            deadline = deadlineDate)
+                            photoPath = photoPath,
+                            active = "t",
+                            deadline = deadlineDate,
+                            closeDate = -1)
         dbHelper.addIssue(newIssue)
     }
 
@@ -136,7 +172,11 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
         dialog.show(supportFragmentManager, "date picker")
     }
     fun issueCreationButtonOnClick(view: View){
-        createIssue()
+        if(nameInput.text.toString().trim().equals("")){
+            errorMessage.visibility = View.VISIBLE
+        }else{
+            createIssue()
+        }
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
@@ -144,6 +184,49 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
         c.set(Calendar.YEAR, year)
         c.set(Calendar.MONTH, month)
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-        deadlineDate = DateFormat.getDateInstance().format(c.time)
+        deadlineDate = SimpleDateFormat.getDateInstance().format(c.time)
+        findViewById<TextView>(R.id.newIssueDeadlineText).setText(deadlineDate)
+
     }
+
+    fun takePicture(view: View){
+       dispatchTakePictureIntent()
+    }
+
+
+
+
+
+
+
+    private fun dispatchTakePictureIntent() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            val extras = data?.extras
+            val imageBitmap =extras!!["data"]  as Bitmap
+            image.setImageBitmap(imageBitmap)
+            image.visibility = View.VISIBLE
+            delImgBtn.visibility = View.VISIBLE
+            val s = storageHelper.saveToInternalStorage(imageBitmap)
+            if(s != null) photoPath = s
+        }
+    }
+
+
+    fun delImage(view: View){
+        photoPath = ""
+        image.visibility = View.GONE
+        delImgBtn.visibility = View.GONE
+    }
+
+
+
 }

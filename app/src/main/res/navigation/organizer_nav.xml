@@ -7,17 +7,17 @@
 
     <activity
         android:id="@+id/overview"
-        android:name="com.example.pdaorganizer.Overview"
+        android:name="com.example.pdaorganizer.activities.Overview"
         android:label="activity_overview"
         tools:layout="@layout/activity_overview" />
     <activity
         android:id="@+id/statistics"
-        android:name="com.example.pdaorganizer.Statistics"
+        android:name="com.example.pdaorganizer.activities.Statistics"
         android:label="activity_statistics"
         tools:layout="@layout/activity_statistics" />
     <activity
-        android:id="@+id/newIssue"
-        android:name="com.example.pdaorganizer.NewIssue"
+        android:id="@+id/newIssueExpireDateInput"
+        android:name="com.example.pdaorganizer.activities.NewIssue"
         android:label="activity_new_issue"
         tools:layout="@layout/activity_new_issue" />
 

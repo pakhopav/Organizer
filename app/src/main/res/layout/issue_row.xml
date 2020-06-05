@@ -12,8 +12,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="54dp">
 
             <View
                 android:id="@+id/issueImportanceSquare"
@@ -64,13 +64,13 @@
                 app:layout_constraintStart_toEndOf="@+id/issueImportanceSquare" />
 
 
-
             <ImageButton
                 android:id="@+id/issueInfoButton"
                 android:layout_width="45dp"
                 android:layout_height="0dp"
                 android:adjustViewBounds="true"
                 android:background="@null"
+                android:paddingVertical="6dp"
                 android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -83,24 +83,25 @@
                 android:layout_height="0dp"
                 android:adjustViewBounds="true"
                 android:background="@null"
-                android:paddingVertical="8dp"
+                android:paddingVertical="12dp"
                 android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/issueInfoButton"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_delete" />
+                app:srcCompat="@drawable/ic_close" />
 
-            <TextView
-                android:id="@+id/issueDeadlineText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="164dp"
-                android:layout_marginLeft="164dp"
-                android:layout_marginBottom="8dp"
-                android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/issueImportanceSquare" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/issueDeadlineText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20d"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/issueCard"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

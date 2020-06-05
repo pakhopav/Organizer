@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="326dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="200dp"
+        android:background="#72A0D1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:background="#333333"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:background="#333333"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/view2" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:background="#333333"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/view3" />
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:background="#333333"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/view4" />
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:background="#333333"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/view5" />
+
+    <View
+        android:id="@+id/view7"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:background="#333333"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/view6" />
+
+    <View
+        android:id="@+id/view8"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:background="#333333"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/view7" />
+
+    <View
+        android:id="@+id/view9"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:background="#333333"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/view8" />
+
+    <View
+        android:id="@+id/view10"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:background="#333333"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/view9" />
+
+    <View
+        android:id="@+id/view11"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:background="#333333"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/view10" />
+</androidx.constraintlayout.widget.ConstraintLayout>

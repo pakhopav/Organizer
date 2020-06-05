@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">PDA organizer</string>
+    <string name="ok">ok</string>
+    <string name="cancel">cancel</string>
     <string-array name="issueCategoriesStrings">
         <item>No Category</item>
         <item>Debt</item>

@@ -1,4 +1,4 @@
-package com.example.pdaorganizer
+package com.example.pdaorganizer.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import com.example.pdaorganizer.R
 import com.example.pdaorganizer.db.DbHelper
 import com.example.pdaorganizer.model.User
 

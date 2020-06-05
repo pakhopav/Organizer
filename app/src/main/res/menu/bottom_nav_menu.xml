@@ -10,7 +10,7 @@
         android:title=""
         android:icon="@drawable/ic_overview"/>
     <item
-        android:id="@+id/newIssue"
+        android:id="@+id/newIssueExpireDateInput"
         android:title=""
         android:icon="@drawable/ic_add"/>
     <item

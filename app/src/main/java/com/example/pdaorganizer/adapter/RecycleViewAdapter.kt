@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pdaorganizer.helpers.DateHelper
 import com.example.pdaorganizer.activities.IssueInfo
 import com.example.pdaorganizer.R
+import com.example.pdaorganizer.activities.ClosedIssueInfo
 import com.example.pdaorganizer.db.DbHelper
 import com.example.pdaorganizer.dialogs.CloseIssueDialog
 import com.example.pdaorganizer.dialogs.OrganizerDialogListener
@@ -93,7 +94,7 @@ class RecycleViewAdapter(private val context: Context , private val issueList: A
         }
 
 
-
+        if(issueList[position].active == "f"||issueList[position].active == "ex") holder.deleteButton.visibility =View.GONE
         holder.deleteButton.setOnClickListener {
             val dialog = CloseIssueDialog()
             dialog.setMyListener(object : OrganizerDialogListener {
@@ -126,7 +127,12 @@ class RecycleViewAdapter(private val context: Context , private val issueList: A
             val editor = sp.edit()
             editor.putInt(DbHelper.ISSUE_ID, issueList[position].id)
             editor.apply()
-            context.startActivity(Intent(context, IssueInfo::class.java))
+            if(issueList[position].active == "f"||issueList[position].active == "ex"){
+                context.startActivity(Intent(context, ClosedIssueInfo::class.java))
+            }else{
+                context.startActivity(Intent(context, IssueInfo::class.java))
+            }
+
         }
 //        if(issueList[position].active.equals("f")) holder.deleteButton.visibility = View.GONE
 

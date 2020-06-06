@@ -11,17 +11,14 @@ import android.view.View
 import android.widget.PopupMenu
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pdaorganizer.App
 import com.example.pdaorganizer.R
 import com.example.pdaorganizer.adapter.RecycleViewAdapter
 import com.example.pdaorganizer.db.DbHelper
 import com.example.pdaorganizer.helpers.DateHelper
 import com.example.pdaorganizer.model.Issue
-import com.example.pdaorganizer.model.User
 import com.example.pdaorganizer.service.OrganizerJobService
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.text.SimpleDateFormat

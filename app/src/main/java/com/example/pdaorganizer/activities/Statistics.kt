@@ -22,17 +22,24 @@ import com.example.pdaorganizer.helpers.DateHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 import java.util.stream.Collectors
+import kotlin.collections.HashMap
 
 
 class Statistics : AppCompatActivity() {
     private lateinit var bottomNavigationView :BottomNavigationView
-    val monthArray = arrayListOf("January","February","March","April","May","June","July","August","September","October","November","December")
-    lateinit var dateText: TextView
-    lateinit var usernameCont :TextView
-    lateinit var totalClosed: TextView
-    lateinit var totalExpired :TextView
-    lateinit var arrayViews :Array<View>
+    private lateinit var dateText: TextView
+    private lateinit var usernameCont :TextView
+    private lateinit var totalClosed: TextView
+    private lateinit var totalExpired :TextView
+    private lateinit var arrayViews :Array<View>
+
+
     private lateinit var dbHelper: DbHelper
+    val monthArray = arrayListOf("January","February","March","April","May","June","July","August","September","October","November","December")
+    private lateinit var todayString: String
+    private var currentDays =Array(30){0}
+
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +72,8 @@ class Statistics : AppCompatActivity() {
         totalExpired.setText(expired.toString())
         dateText = findViewById(R.id.dateText)
         val today = Calendar.getInstance().time
-        dateText.setText("${monthArray[today.month]} ${1900 + today.year}")
+        todayString= "${monthArray[today.month]} ${1900 + today.year}"
+        dateText.setText(todayString)
         val n = DateHelper().getdays(today.year , today.month ,1).toInt()
         configureGraf(n)
     }
@@ -97,8 +105,8 @@ class Statistics : AppCompatActivity() {
     fun showDialog(view: View){
         val pickerDialog = MonthYearPickerDialog()
         pickerDialog.setListener(OnDateSetListener { datePicker, year, month, i2 ->
-            dateText.setText("${monthArray[month]} ${year}")
-            val n = DateHelper().getdays(year -1900, month-1 ,2).toInt()
+            dateText.setText("${monthArray[month-1]} ${year}")
+            val n = DateHelper().getdays(year -1900, month-1 ,1).toInt()
             configureGraf(n)
 
         })
@@ -111,14 +119,15 @@ class Statistics : AppCompatActivity() {
             val userId = getSharedPreferences(DbHelper.SHARED_PREFS, MODE_PRIVATE).getInt(DbHelper.USER_ID ,-1)
             val issues = dbHelper.getAllClosedIssuesOfUser(userId)
             if(issues.size ==0)return
-            val l = issues.stream().map { dh.getdays(it.closeDate).toInt()}.collect(Collectors.toList())
-            val ll= l.filter{ it>= n  }.map { (it-n)/3 }
-            val lll = ll   .filter{it < 10}.forEach { array[it]++ }
+            val l = issues.stream().map { dh.getdays(it.closeDate).toInt()}.filter{ it>= n  }.collect(Collectors.toList())
+            val ll = l.map { it-n }.filter{it <= 30}.forEach { currentDays[it]++ }
+            l.map { (it-n)/3 }.filter{it < 10}.forEach { array[it]++ }
             for(i in 0..9 ){
                 var newHeight =  5 + array[i]*19
-                if(newHeight == 5)continue
                 if(newHeight >= 195) newHeight =195
-                arrayViews[i].layoutParams.height =  newHeight
+                val params = arrayViews[i].layoutParams
+                params.height =(newHeight * 2.7f).toInt()
+                arrayViews[i].layoutParams = params
             }
 
     }
@@ -172,5 +181,12 @@ class Statistics : AppCompatActivity() {
         editor.putInt(DbHelper.USER_ID, i)
         editor.apply()
         startActivity(Intent(this, Login::class.java))
+    }
+
+    fun goToByDay(view: View){
+        val arr: IntArray = currentDays.toIntArray()
+        val str = dateText.text.toString()
+        val intent = Intent(this, StatisticsByDay::class.java).putExtra("date", str).putExtra("array", arr)
+        startActivity(intent)
     }
 }

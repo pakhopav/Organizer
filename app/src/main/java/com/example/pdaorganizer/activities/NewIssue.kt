@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ import com.example.pdaorganizer.adapter.DatePickFragment
 import com.example.pdaorganizer.adapter.IssueCategorySpinnerAdapter
 import com.example.pdaorganizer.adapter.IssueImportanceSpinnerAdapter
 import com.example.pdaorganizer.db.DbHelper
+import com.example.pdaorganizer.helpers.DateHelper
 import com.example.pdaorganizer.helpers.StorageHelper
 import com.example.pdaorganizer.model.Issue
 import com.example.pdaorganizer.model.IssueCategory
@@ -37,6 +39,8 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
     private lateinit var errorMessage : TextView
     private lateinit var image :ImageView
     private lateinit var delImgBtn :ImageButton
+    private lateinit var bigImage: ImageView
+
 
 
     private lateinit var dbHelper: DbHelper
@@ -160,6 +164,8 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
                             deadline = deadlineDate,
                             closeDate = "")
         dbHelper.addIssue(newIssue)
+
+
     }
 
 
@@ -169,9 +175,15 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
     }
     fun issueCreationButtonOnClick(view: View){
         if(nameInput.text.toString().trim().equals("")){
+            errorMessage.setText("Enter issue name")
             errorMessage.visibility = View.VISIBLE
         }else{
+            errorMessage.visibility = View.GONE
             createIssue()
+            val toast = Toast.makeText(this,"Issue created",Toast.LENGTH_SHORT)
+            toast.setGravity(Gravity.CENTER, 0,520 )
+
+            toast.show()
         }
     }
 
@@ -180,10 +192,19 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
         c.set(Calendar.YEAR, year)
         c.set(Calendar.MONTH, month)
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-        deadlineDate = SimpleDateFormat.getDateInstance().format(c.time)
-        findViewById<TextView>(R.id.newIssueDeadlineText).setText(deadlineDate)
+        if(DateHelper().getDifferenceFromDateToToday(c.time)>=0){
+            deadlineDate = SimpleDateFormat.getDateInstance().format(c.time)
+            findViewById<TextView>(R.id.newIssueDeadlineText).setText(deadlineDate)
+            errorMessage.visibility = View.GONE
+
+        }else{
+            errorMessage.setText("Invalid expiration date")
+            errorMessage.visibility = View.VISIBLE
+        }
+
 
     }
+
 
     fun takePicture(view: View){
        dispatchTakePictureIntent()
@@ -221,6 +242,13 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
         photoPath = ""
         image.visibility = View.GONE
         delImgBtn.visibility = View.GONE
+    }
+
+    fun openBigImage(view: View){
+        bigImage.visibility = View.VISIBLE
+    }
+    fun hideBigImage(view: View){
+        bigImage.visibility = View.GONE
     }
 
 

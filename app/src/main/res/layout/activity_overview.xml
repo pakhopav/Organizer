@@ -10,35 +10,32 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="45dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <Button
             android:id="@+id/button6"
-            android:layout_width="90dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="12dp"
+            android:layout_width="85dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="28dp"
             android:onClick="openCategoryFilter"
             android:text="filter category"
             android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/button7"
-            app:layout_constraintStart_toEndOf="@+id/button7" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
             android:id="@+id/button7"
             android:layout_width="90dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="8dp"
             android:onClick="openImportanceFilter"
             android:text="Filter importance"
             android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/button6"
+            app:layout_constraintEnd_toStartOf="@+id/button6" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -65,10 +62,10 @@
         android:id="@+id/textView2"
         android:layout_width="122dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:text="Overview"
         android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.IssueInfo">
+    tools:context=".activities.ClosedIssueInfo">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -19,18 +19,19 @@
 
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView3C"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="40dp"
         android:text="Issue"
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/infoName"
+        android:id="@+id/infoNameC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -39,33 +40,36 @@
         android:textColor="#333333"
         android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView3"
-        app:layout_constraintStart_toEndOf="@+id/textView3" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView3C"
+        app:layout_constraintStart_toEndOf="@+id/textView3C" />
 
     <TextView
-        android:id="@+id/infoImportance"
+        android:id="@+id/infoImportanceC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="44dp"
         android:text="Low"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3C" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textView6C"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="44dp"
         android:text="Importance"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/infoImportance"
-        app:layout_constraintTop_toTopOf="@+id/infoImportance" />
+        app:layout_constraintStart_toEndOf="@+id/infoImportanceC"
+        app:layout_constraintTop_toBottomOf="@+id/textView3C" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/textView7C"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -74,10 +78,10 @@
         android:text="Category:"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoImportance" />
+        app:layout_constraintTop_toBottomOf="@+id/infoImportanceC" />
 
     <TextView
-        android:id="@+id/infoCategory"
+        android:id="@+id/infoCategoryC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -87,22 +91,23 @@
         android:textColor="#333333"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/infoImportance" />
+        app:layout_constraintStart_toEndOf="@+id/textView7C"
+        app:layout_constraintTop_toBottomOf="@+id/infoImportanceC" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/textView9C"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="44dp"
         android:text="Description:"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7C" />
 
     <TextView
-        android:id="@+id/infoDescription"
+        android:id="@+id/infoDescriptionC"
         android:layout_width="328dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -113,10 +118,10 @@
         android:textColor="#333333"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9C" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/textView13C"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -125,10 +130,10 @@
         android:text="Deadline:"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoIssueImage" />
+        app:layout_constraintTop_toBottomOf="@+id/infoIssueImageC" />
 
     <TextView
-        android:id="@+id/infoDeadline"
+        android:id="@+id/infoDeadlineC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -137,11 +142,11 @@
         android:textColor="#333333"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView13"
-        app:layout_constraintStart_toEndOf="@+id/textView13" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView13C"
+        app:layout_constraintStart_toEndOf="@+id/textView13C" />
 
     <TextView
-        android:id="@+id/infoImageLabel"
+        android:id="@+id/infoImageLabelC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -150,42 +155,29 @@
         android:text="Photo:"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/infoDescriptionC" />
 
     <ImageView
-        android:id="@+id/infoIssueImage"
+        android:id="@+id/infoIssueImageC"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="56dp"
         android:layout_marginLeft="56dp"
         android:onClick="openBigImage"
-        app:layout_constraintStart_toEndOf="@+id/infoImageLabel"
-        app:layout_constraintTop_toTopOf="@+id/infoImageLabel"
+        app:layout_constraintStart_toEndOf="@+id/infoImageLabelC"
+        app:layout_constraintTop_toTopOf="@+id/infoImageLabelC"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="55dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
-        android:onClick="goToEdit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_edit" />
-
     <ImageView
-        android:id="@+id/infoIssueBigImage"
+        android:id="@+id/infoIssueBigImageC"
         android:layout_width="307dp"
         android:layout_height="489dp"
         android:onClick="hideBigImage"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationViewC"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

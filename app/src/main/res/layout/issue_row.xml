@@ -30,7 +30,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="54dp">
+            android:layout_height="54dp"
+            android:background="#DFDFDF">
 
             <View
                 android:id="@+id/issueImportanceSquare"
@@ -47,8 +48,7 @@
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="7dp"
                 app:layout_constraintStart_toStartOf="@+id/issueImportanceSquare"
-                app:layout_constraintTop_toTopOf="parent"
-                 />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/issueNameText"

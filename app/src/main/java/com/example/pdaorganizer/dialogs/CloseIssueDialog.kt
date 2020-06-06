@@ -14,7 +14,7 @@ class CloseIssueDialog : AppCompatDialogFragment() {
     }
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
-        builder.setTitle("lose issue?")
+        builder.setTitle("Close issue?")
             .setPositiveButton("ok", DialogInterface.OnClickListener { dialog, which ->
                 listener.onOk()
             })

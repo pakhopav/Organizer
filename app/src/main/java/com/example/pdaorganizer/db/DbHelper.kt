@@ -75,7 +75,7 @@ class DbHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
                     photoPath = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_PHOTO)),
                     deadline = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_DEADLINE)),
                     active =  cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_ACTIVE)),
-                    closeDate = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_CLOSE)).toInt())
+                    closeDate = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_CLOSE)))
 
 
         }else{
@@ -124,33 +124,32 @@ class DbHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             return null
         }
     }
-    fun getAllIssues(): List<Issue> {
+    fun getAllIssuesForUser(userId : Int): List<Issue> {
         // array of columns to fetch
         val columns = arrayOf(COLUMN_ISSUE_ID, COLUMN_ISSUE_NAME, COLUMN_ISSUE_USER, COLUMN_ISSUE_CATEGORY, COLUMN_ISSUE_DESCRIPTION, COLUMN_ISSUE_IMPORTANCE,
-            COLUMN_ISSUE_ACTIVE,COLUMN_ISSUE_PHOTO, COLUMN_ISSUE_DEADLINE, COLUMN_ISSUE_CLOSE)
+            COLUMN_ISSUE_ACTIVE, COLUMN_ISSUE_PHOTO, COLUMN_ISSUE_DEADLINE, COLUMN_ISSUE_CLOSE)
 
         val issueList = ArrayList<Issue>()
 
         // selection criteria
 
         // selection arguments
-        val selection = "$COLUMN_ISSUE_ACTIVE = ? AND $COLUMN_ISSUE_USER"
+        val selection = "$COLUMN_ISSUE_USER = ?"
 
         // selection arguments
-        val selectionArgs = arrayOf("t", "1")
+        val selectionArgs = arrayOf(userId.toString())
 
 
         val db = this.readableDatabase
-        var sortOrder = "$COLUMN_ISSUE_NAME ASC"
         // query the user table
         val cursor = db.query(
             TABLE_ISSUE, //Table to query
             columns,            //columns to return
-            null,    //columns for the WHERE clause
-            null,  //The values for the WHERE clause
+            selection,    //columns for the WHERE clause
+            selectionArgs,  //The values for the WHERE clause
             null,      //group the rows
             null,       //filter by row groups
-            sortOrder)         //The sort order
+            null)         //The sort order
 
         if (cursor.moveToFirst()) {
             do {
@@ -163,7 +162,7 @@ class DbHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
                     photoPath = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_PHOTO)),
                     active = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_ACTIVE)),
                     deadline = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_DEADLINE)),
-                    closeDate = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_CLOSE)).toInt())
+                    closeDate = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_CLOSE)))
 
                 issueList.add(issue)
             } while (cursor.moveToNext())
@@ -197,7 +196,7 @@ class DbHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             selectionArgs,  //The values for the WHERE clause
             null,      //group the rows
             null,       //filter by row groups
-            sortOrder)         //The sort order
+            null)         //The sort order
 
         if (cursor.moveToFirst()) {
             do {
@@ -210,7 +209,7 @@ class DbHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
                     photoPath = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_PHOTO)),
                     active = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_ACTIVE)),
                     deadline = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_DEADLINE)),
-                    closeDate = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_CLOSE)).toInt())
+                    closeDate = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_CLOSE)))
 
                 issueList.add(issue)
             } while (cursor.moveToNext())
@@ -246,7 +245,7 @@ class DbHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             selectionArgs,  //The values for the WHERE clause
             null,      //group the rows
             null,       //filter by row groups
-            sortOrder)         //The sort order
+            null)         //The sort order
 
         if (cursor.moveToFirst()) {
             do {
@@ -259,7 +258,7 @@ class DbHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
                     photoPath = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_PHOTO)),
                     active = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_ACTIVE)),
                     deadline = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_DEADLINE)),
-                    closeDate = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_CLOSE)).toInt())
+                    closeDate = cursor.getString(cursor.getColumnIndex(COLUMN_ISSUE_CLOSE)))
 
                 issueList.add(issue)
             } while (cursor.moveToNext())
@@ -286,7 +285,7 @@ class DbHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             null,  //The values for the WHERE clause
             null,      //group the rows
             null,       //filter by row groups
-            sortOrder)         //The sort order
+            null)         //The sort order
         if (cursor.moveToFirst()) {
             do {
                 val user = User(id = cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID)).toInt(),
@@ -417,7 +416,7 @@ class DbHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         val ISSUE_ID = "issueId"
 
         // Database Version
-        private val DATABASE_VERSION = 11
+        private val DATABASE_VERSION = 12
 
         // Database Name
         private val DATABASE_NAME = "Organizer.db"

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/filterCatItem1" android:title="Any"/>
+    <item android:id="@+id/filterCatItem2" android:title="Without category"/>
+    <item android:id="@+id/filterCatItem3" android:title="Debts"/>
+    <item android:id="@+id/filterCatItem4" android:title="School"/>
+    <item android:id="@+id/filterCatItem5" android:title="Work"/>
+    <item android:id="@+id/filterCatItem6" android:title="Shop"/>
+</menu>

@@ -82,9 +82,8 @@
         android:id="@+id/newIssueError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="60dp"
         android:text="Enter issue name"
         android:textColor="#FF0404"
         app:layout_constraintStart_toStartOf="parent"
@@ -158,6 +157,17 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/newissueImage"
         app:layout_constraintTop_toTopOf="@+id/newissueImage" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="New Issue"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

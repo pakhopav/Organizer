@@ -77,14 +77,10 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
 
     fun initNavBar(){
         bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        bottomNavigationView.menu.getItem(2).setChecked(true)
+        bottomNavigationView.menu.getItem(1).setChecked(true)
         bottomNavigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.home -> {
-                    startActivity(Intent(applicationContext, MainActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    return@OnNavigationItemSelectedListener true
-                }
+
                 R.id.overview -> {
                     startActivity(Intent(applicationContext, Overview::class.java))
                     overridePendingTransition(0, 0)
@@ -162,7 +158,7 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
                             photoPath = photoPath,
                             active = "t",
                             deadline = deadlineDate,
-                            closeDate = -1)
+                            closeDate = "")
         dbHelper.addIssue(newIssue)
     }
 

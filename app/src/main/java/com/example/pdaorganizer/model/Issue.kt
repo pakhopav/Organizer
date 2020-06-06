@@ -9,6 +9,6 @@ data class Issue(val id: Int = -1,
                  val photoPath: String,
                  val active: String,
                  val deadline: String,
-                 val closeDate: Int
+                 val closeDate: String
                  ) {
 }

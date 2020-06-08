@@ -37,6 +37,7 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
     private lateinit var descriptionInput : EditText
     private lateinit var button: Button
     private lateinit var errorMessage : TextView
+    private lateinit var deadlineText : TextView
     private lateinit var image :ImageView
     private lateinit var delImgBtn :ImageButton
     private lateinit var bigImage: ImageView
@@ -112,6 +113,7 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
         errorMessage.visibility = View.GONE
         image = findViewById(R.id.newissueImage)
         delImgBtn = findViewById(R.id.newissueDeleteImage)
+        deadlineText = findViewById(R.id.newIssueDeadlineText)
     }
 
     fun initObjects(){
@@ -180,11 +182,22 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
         }else{
             errorMessage.visibility = View.GONE
             createIssue()
+            clearInputs()
             val toast = Toast.makeText(this,"Issue created",Toast.LENGTH_SHORT)
             toast.setGravity(Gravity.CENTER, 0,520 )
 
             toast.show()
         }
+    }
+
+    fun clearInputs(){
+        nameInput.setText("")
+        descriptionInput.setText("")
+        categorySpinner.setSelection(0)
+        importanceSpinner.setSelection(0)
+        delImage(delImgBtn)
+        deadlineDate = ""
+        deadlineText.setText("")
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
@@ -194,7 +207,7 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth)
         if(DateHelper().getDifferenceFromDateToToday(c.time)>=0){
             deadlineDate = SimpleDateFormat.getDateInstance().format(c.time)
-            findViewById<TextView>(R.id.newIssueDeadlineText).setText(deadlineDate)
+            deadlineText.setText(deadlineDate)
             errorMessage.visibility = View.GONE
 
         }else{

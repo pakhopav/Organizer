@@ -3,5 +3,5 @@
     <item android:id="@+id/filterImpItem1" android:title="Any"/>
     <item android:id="@+id/filterImpItem2" android:title="Low importance"/>
     <item android:id="@+id/filterImpItem3" android:title="Mid importance"/>
-    <item android:id="@+id/filterImpItem4" android:title="Heigh importance"/>
+    <item android:id="@+id/filterImpItem4" android:title="High importance"/>
 </menu>

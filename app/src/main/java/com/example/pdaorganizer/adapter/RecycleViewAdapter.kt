@@ -9,6 +9,8 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pdaorganizer.helpers.DateHelper
@@ -28,7 +30,7 @@ class RecycleViewAdapter(private val context: Context , private val issueList: A
     class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view){
         val issueName : TextView
         val deleteButton : ImageButton
-        val infoButton : ImageButton
+        val card : ConstraintLayout
         val importanceView : View
 
         var categoryImage : ImageView
@@ -36,7 +38,7 @@ class RecycleViewAdapter(private val context: Context , private val issueList: A
         init {
             issueName = view.findViewById(R.id.issueNameText)
             deleteButton = view.findViewById(R.id.issueDeleteButton)
-            infoButton  = view.findViewById(R.id.issueInfoButton)
+            card = view.findViewById(R.id.cardBody)
             importanceView = view.findViewById(R.id.issueImportanceSquare)
             categoryImage = view.findViewById(R.id.issueCategoryRowImage)
             issueDeadline = view.findViewById(R.id.issueDeadlineText)
@@ -121,8 +123,20 @@ class RecycleViewAdapter(private val context: Context , private val issueList: A
             dialog.show((context as AppCompatActivity).supportFragmentManager, "close dialog")
 
         }
-
-        holder.infoButton.setOnClickListener {
+//
+//        holder.infoButton.setOnClickListener {
+//            val sp = context.getSharedPreferences(DbHelper.SHARED_PREFS, Context.MODE_PRIVATE)
+//            val editor = sp.edit()
+//            editor.putInt(DbHelper.ISSUE_ID, issueList[position].id)
+//            editor.apply()
+//            if(issueList[position].active == "f"||issueList[position].active == "ex"){
+//                context.startActivity(Intent(context, ClosedIssueInfo::class.java))
+//            }else{
+//                context.startActivity(Intent(context, IssueInfo::class.java))
+//            }
+//
+//        }
+        holder.card.setOnClickListener{
             val sp = context.getSharedPreferences(DbHelper.SHARED_PREFS, Context.MODE_PRIVATE)
             val editor = sp.edit()
             editor.putInt(DbHelper.ISSUE_ID, issueList[position].id)
@@ -134,6 +148,7 @@ class RecycleViewAdapter(private val context: Context , private val issueList: A
             }
 
         }
+
 //        if(issueList[position].active.equals("f")) holder.deleteButton.visibility = View.GONE
 
 

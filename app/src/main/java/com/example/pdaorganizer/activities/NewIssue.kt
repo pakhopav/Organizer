@@ -185,7 +185,6 @@ class NewIssue : AppCompatActivity() , DatePickerDialog.OnDateSetListener {
             clearInputs()
             val toast = Toast.makeText(this,"Issue created",Toast.LENGTH_SHORT)
             toast.setGravity(Gravity.CENTER, 0,520 )
-
             toast.show()
         }
     }

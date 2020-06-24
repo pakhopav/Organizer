@@ -8,7 +8,7 @@ class DateHelper {
         val date2 = Calendar.getInstance().getTime()
         val difference = (date1.time - date2.time)
         val differenceDates = difference / (24 * 60 * 60 * 1000)
-        return (differenceDates).toInt()
+        return (differenceDates+1).toInt()
     }
 
     fun getdays(): Long{
